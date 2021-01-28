@@ -1,0 +1,1 @@
+export const MINUTE_TO_PIXEL_RATIO = 1;
