@@ -12,4 +12,11 @@ export function calculateWidthValue(selectedStart: DateTime, selectedEnd: DateTi
 
 export function isIntervalFree(events: TimeEvent[], intervalStart: DateTime, intervalEnd: DateTime): boolean {
   // TODO: implement the algorithm. You can rely on events being sorted.
+  var isEventExist = events.filter((event:TimeEvent)=> 
+          ((intervalStart >= DateTime.fromISO(event?.start ?? "") && intervalStart <= DateTime.fromISO(event?.end ?? ""))
+          || (intervalEnd >= DateTime.fromISO(event?.start ?? "") && intervalEnd <= DateTime.fromISO(event?.end ?? ""))
+          || (DateTime.fromISO(event?.start ?? "") >= intervalEnd && DateTime.fromISO(event?.end ?? "") <= intervalEnd)
+          || (DateTime.fromISO(event?.start ?? "") >= intervalStart && DateTime.fromISO(event?.end ?? "") <= intervalStart)
+          || (DateTime.fromISO(event?.start ?? "") >= intervalStart && DateTime.fromISO(event?.end ?? "") <= intervalEnd)));
+  return isEventExist?.length === 0
 }

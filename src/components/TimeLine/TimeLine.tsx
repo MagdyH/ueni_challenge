@@ -1,9 +1,10 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import calculateWidth from '../../generator/utils/calculateWidth';
-import { last, first } from 'lodash';
+import { calculateWidthValue } from '../../utils/index';
+import { last } from 'lodash';
 import { DateTime } from 'luxon';
 import calculateNewInterval from './utils';
+import {EventContext} from '../../App';
 
 interface RootProps {
   width: number;
@@ -27,18 +28,23 @@ interface TimeLineProps {
 }
 
 const TimeLine: React.FC<TimeLineProps> = ({ children, timeLineStart }) => {
-  const selectedStart =
-  const selectedEnd =
-  const events =
+  const { events, selectedStart, selectedEnd, setSelectedStart, setSelectedEnd, fetchEventsdata } = useContext(EventContext);
+
+  useEffect(()=>{
+    fetchEventsdata();
+  },[fetchEventsdata])
 
   const contentRef = useRef<HTMLDivElement| null>(null);
-  const width = calculateWidth(timeLineStart, DateTime.fromISO(last(events)?.end ?? ""));
+  const width = calculateWidthValue(timeLineStart, DateTime.fromISO(last(events)?.end ?? ""));
+
 
   const onClick = useCallback((e: React.MouseEvent) => {
     const { start, end } = calculateNewInterval(timeLineStart, selectedStart, selectedEnd, contentRef.current!, e.clientX);
 
     // TODO: set new states
-  }, [])
+    setSelectedEnd(end);
+    setSelectedStart(start);
+  },[timeLineStart, selectedStart, selectedEnd, setSelectedEnd, setSelectedStart])
 
   return (
     <Root>

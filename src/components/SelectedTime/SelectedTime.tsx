@@ -1,7 +1,8 @@
 import { DateTime } from "luxon";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { calculateLeftValue, calculateWidthValue, isIntervalFree } from "../../utils";
+import {EventContext} from '../../App';
 
 interface RootProps {
   left: number;
@@ -27,9 +28,7 @@ interface SelectedTimeProps {
 }
 
 const SelectedTime: React.FC<SelectedTimeProps> = ({ timeLineStart }) => {
-  const events =
-  const selectedStart =
-  const selectedEnd =
+  const { events, selectedEnd, selectedStart } = useContext(EventContext);
 
   const left = calculateLeftValue(timeLineStart, selectedStart);
   const width = calculateWidthValue(selectedStart, selectedEnd);

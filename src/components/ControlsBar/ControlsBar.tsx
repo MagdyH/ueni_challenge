@@ -1,8 +1,7 @@
 import { Button, FormControl, InputLabel, MenuItem } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
 import { DateTime } from 'luxon';
-import React, { HTMLAttributes, useCallback, useContext } from 'react'
+import React, { HTMLAttributes } from 'react'
 import styled from 'styled-components';
 import useControlsBar from './hooks/useControlBar';
 import Datetime from 'react-datetime';
